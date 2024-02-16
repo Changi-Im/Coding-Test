@@ -61,7 +61,7 @@ void findLadder(){
     }
 }
 
-void DFS(int L, int max, int sc, int sr){
+void DFS(int L, int max, int sc){
     if(L > max){
         // output();
         // printf("\n");
@@ -74,14 +74,14 @@ void DFS(int L, int max, int sc, int sr){
         return;
     }
 
-    for(int r = sr; r < 2*H + 1; r += 2){
+    for(int r = 1; r < 2*H + 1; r += 2){
         for(int c = sc; c < 2*N; c += 2){
             if(MAP[r][c] == 1 || MAP[r][c+2] == 1 || MAP[r][c-2] == 1)
                 continue;
 
             if(MAP[r][c] == 0){ 
                 MAP[r][c] = 1;   
-                DFS(L+1, max, sc, sr);
+                DFS(L+1, max, c);
                 MAP[r][c] = 0;
                 if(ANSWER != 4)
                     return;
@@ -99,7 +99,7 @@ int main(){
     }
     flag = 0;
     for(int i = 1; i < 4; i++){
-        DFS(1,i,2,1);
+        DFS(1,i,2);
         if(ANSWER != 4){
             printf("%d", ANSWER);
             return 0;
